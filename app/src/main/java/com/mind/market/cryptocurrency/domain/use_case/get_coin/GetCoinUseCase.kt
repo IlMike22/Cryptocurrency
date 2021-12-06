@@ -2,6 +2,7 @@ package com.mind.market.cryptocurrency.domain.use_case.get_coin
 
 import com.mind.market.cryptocurrency.common.Resource
 import com.mind.market.cryptocurrency.data.remote.dto.toCoinDetail
+import com.mind.market.cryptocurrency.domain.model.Coin
 import com.mind.market.cryptocurrency.domain.model.CoinDetail
 import com.mind.market.cryptocurrency.domain.repository.ICoinRepository
 import kotlinx.coroutines.flow.Flow
@@ -17,11 +18,11 @@ class GetCoinUseCase @Inject constructor(
         try {
             emit(Resource.Loading())
             val coinDetail = repository.getCoinById(coinId).toCoinDetail()
-            emit(Resource.Success(coinDetail))
+            emit(Resource.Success<CoinDetail>(coinDetail))
         } catch (exception: HttpException) {
-            emit(Resource.Error(exception.localizedMessage ?: "An unexpected error occured."))
+            emit(Resource.Error<CoinDetail>(exception.localizedMessage ?: "An unexpected error occured."))
         } catch (exception: IOException) {
-            emit(Resource.Error("Cannot connect server. Please check your internet connection"))
+            emit(Resource.Error<CoinDetail>("Cannot connect server. Please check your internet connection"))
         }
     }
 }

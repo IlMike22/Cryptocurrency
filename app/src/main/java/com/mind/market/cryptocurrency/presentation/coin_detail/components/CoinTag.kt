@@ -34,5 +34,4 @@ fun CoinTag(
             style = MaterialTheme.typography.body2
         )
     }
-
 }

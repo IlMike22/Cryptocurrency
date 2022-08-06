@@ -5,9 +5,9 @@ import com.mind.market.cryptocurrency.domain.model.Coin
 
 data class CoinDto(
     val id: String,
-    @SerializedName("is_active)")
+    @SerializedName("is_active")
     val isActive: Boolean,
-    @SerializedName("is_new)")
+    @SerializedName("is_new")
     val isNew: Boolean,
     val name: String,
     val rank: Int,
@@ -18,6 +18,7 @@ data class CoinDto(
 fun CoinDto.toCoin(): Coin {
     return Coin(
         id = id,
+        isNew = isNew,
         isActive = isActive,
         name = name,
         rank = rank,
